@@ -18,6 +18,14 @@ Features
 - Bitmap fonts importer
 - Version control automation
 
+Current status
+==============
+
+This is an early alpha version. APIs are subject to breaking changes. 
+I have already shipped a few games using this framework but it lacks proper documentation. Most of the concepts you find in Nez and Monocle still apply to Binocle.
+Binocle for Unity is roughly based on my Binocle engine which is a fully featured cross platform C++ 2D game engine. Nez and Binocle share a lot of inner workings as we developed them at the same time and me and Mike exchanged ideas frequently.
+Binocle for Unity only offers a subset of Binocle as most of the core systems used are those provided by Unity.
+
 Credits
 =======
 

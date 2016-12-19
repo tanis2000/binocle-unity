@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace Binocle
@@ -94,6 +95,18 @@ namespace Binocle
                 v = versionText;
             }
             return v;
+        }
+
+        public static float Approach(float start, float end, float shift)
+        {
+            if (start < end)
+            {
+                return Math.Min(start + shift, end);
+            }
+            else
+            {
+                return Math.Max(start - shift, end);
+            }
         }
 
     }

@@ -42,7 +42,7 @@ namespace Binocle
             {
                 toX = x - halfWidth + margin;
                 toY = y + halfHeight;
-                h = 1.0f;
+                h = -1.0f;
                 w = width - (margin * 2);
             }
 
@@ -59,13 +59,13 @@ namespace Binocle
                 toX = x + halfWidth;
                 toY = y - halfHeight + margin;
                 h = height - (margin * 2);
-                w = 1.0f;
+                w = -1.0f;
             }
 
 
             if (dir == DirectionUnit.Left)
             {
-                toX = x - halfWidth - 1;
+                toX = x - halfWidth;
                 toY = y - halfHeight + margin;
                 h = height - (margin * 2);
                 w = 1.0f;

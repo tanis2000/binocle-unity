@@ -26,6 +26,13 @@ I have already shipped a few games using this framework but it lacks proper docu
 Binocle for Unity is roughly based on my Binocle engine which is a fully featured cross platform C++ 2D game engine. Nez and Binocle share a lot of inner workings as we developed them at the same time and me and Mike exchanged ideas frequently.
 Binocle for Unity only offers a subset of Binocle as most of the core systems used are those provided by Unity.
 
+Getting started
+===============
+
+Binocle needs a few steps to setup correctly so I packaged a starter project to use as the base for your own project.
+
+The starter project is available here: [Binocle Unity Seed](https://github.com/tanis2000/binocle-unity-seed)
+
 Credits
 =======
 

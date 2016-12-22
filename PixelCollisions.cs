@@ -17,6 +17,16 @@ namespace Binocle
 
         private static Rect rectCheck = new Rect();
 
+        public static bool Collide(float x, float y, float width, float height, DirectionUnit dir, int layerMask, out Collider2D[] colliders)
+        {
+            Rect r = RectCollision(x, y, width, height, dir);
+            colliders = Physics2D.OverlapAreaAll(new Vector2(r.x, r.y), new Vector2(r.x + r.width, r.y + r.height), layerMask);
+            if (colliders.Length > 0)
+                return true;
+
+            return false;
+        }
+
         public static bool Collide(float x, float y, float width, float height, DirectionUnit dir, int layerMask)
         {
             Rect r = RectCollision(x, y, width, height, dir);

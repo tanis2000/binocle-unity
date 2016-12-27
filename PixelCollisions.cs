@@ -37,6 +37,31 @@ namespace Binocle
             return false;
         }
 
+        public static Collider2D CollideCheck(float x, float y, float width, float height, int layerMask)
+        {
+            Rect r = RectCollision(x, y, width, height);
+            Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(r.x, r.y), new Vector2(r.x + r.width, r.y + r.height), layerMask);
+            if (colliders.Length > 0) {
+                return colliders[0];
+            }
+            return null;
+        }
+
+        public static bool CollideCheck(float x, float y, float width, float height, int layerMask, Collider2D collToCheck)
+        {
+            Rect r = RectCollision(x, y, width, height);
+            Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(r.x, r.y), new Vector2(r.x + r.width, r.y + r.height), layerMask);
+            if (colliders.Length > 0) {
+                foreach (var c in colliders) {
+                    if (c == collToCheck) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
 
         public static Rect RectCollision(float x, float y, float width, float height, DirectionUnit dir)
         {
@@ -80,6 +105,29 @@ namespace Binocle
                 h = height - (margin * 2);
                 w = 1.0f;
             }
+
+            rectCheck.x = (int)toX;
+            rectCheck.y = (int)toY;
+            rectCheck.width = (int)w;
+            rectCheck.height = (int)h;
+            DebugX.DrawRect(rectCheck, Color.red);
+            return rectCheck;
+        }
+
+        public static Rect RectCollision(float x, float y, float width, float height)
+        {
+            float halfWidth = width / 2;
+            float halfHeight = height / 2;
+            float margin = 1.0f;
+            float toX = 0;
+            float toY = 0;
+            float h = 0;
+            float w = 0;
+
+            toX = x - halfWidth + margin;
+            toY = y - halfHeight + margin;
+            h = height - margin * 2;
+            w = width - margin * 2;
 
             rectCheck.x = (int)toX;
             rectCheck.y = (int)toY;

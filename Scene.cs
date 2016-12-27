@@ -61,6 +61,16 @@ namespace Binocle
             return e;
         }
 
+        public T CreateEntity<T>(string name) where T : Entity
+        {
+            var go = new GameObject(name);
+            var e = go.AddComponent<T>();
+            e.GameObject = go;
+            e.Scene = this;
+            e.GameObject.transform.SetParent(this.transform);
+            return e;
+        }
+
         public virtual void Remove()
         {
         }

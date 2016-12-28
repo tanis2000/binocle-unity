@@ -109,6 +109,21 @@ namespace Binocle
             }
         }
 
+        public static Vector2 Approach(this Vector2 val, Vector2 target, float maxMove)
+        {
+            if ((maxMove == 0f) || (val == target))
+            {
+                return val;
+            }
+            Vector2 vector = target - val;
+            if (vector.magnitude < maxMove)
+            {
+                return target;
+            }
+            vector.Normalize();
+            return (val + ((Vector2) (vector * maxMove)));
+        }
+
     }
 }
 

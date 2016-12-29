@@ -33,7 +33,7 @@ namespace Binocle.TileMaps
 				{
 					Subtexture sub = new Subtexture( texture, x, y, tileWidth, tileHeight );
 					_regions.Add( id, sub );
-					Sprite sprite = Sprite.Create(sub.texture2D, sub.sourceRect, sub.center, 1);
+                    Sprite sprite = Sprite.Create(texture, sub.sourceRect, new Vector2(0.5f, 0.5f), 1);
 					_sprites.Add(id, sprite);
 					id++;
 				}

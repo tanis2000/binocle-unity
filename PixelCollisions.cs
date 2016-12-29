@@ -62,6 +62,13 @@ namespace Binocle
             return false;
         }
 
+        public static Collider2D[] CollideCheckAll(float x, float y, float width, float height, int layerMask)
+        {
+            Rect r = RectCollision(x, y, width, height);
+            Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(r.x, r.y), new Vector2(r.x + r.width, r.y + r.height), layerMask);
+            return colliders;
+        }
+
 
         public static Rect RectCollision(float x, float y, float width, float height, DirectionUnit dir)
         {

@@ -9,6 +9,7 @@ namespace Binocle
         public float speed = 10f;
         public float delay = 1f;
         public bool freeCamera;
+        public Vector2 SubPixelCounter = Vector2.zero;
 
         private bool following = true;
         private float targetLoss;
@@ -20,7 +21,7 @@ namespace Binocle
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void LateUpdate()
         {
             if (freeCamera && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
                 following = false;
@@ -46,8 +47,19 @@ namespace Binocle
                 camTargetPos.z = transform.position.z;
                 camTargetPos.x = Mathf.Clamp(camTargetPos.x, Camera.main.orthographicSize * Camera.main.aspect, 64 * 16 - (Camera.main.orthographicSize * Camera.main.aspect));
                 camTargetPos.y = Mathf.Clamp(camTargetPos.y, Camera.main.orthographicSize, 10000f);
-                transform.position = Vector3.Lerp(transform.position, camTargetPos, Time.deltaTime * 5f);
-                transform.position = new Vector3(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y), Mathf.FloorToInt(transform.position.z));
+                var newPos = Vector3.Lerp(transform.position, camTargetPos, Time.deltaTime * 5f);
+                
+                SubPixelCounter.x += newPos.x - transform.position.x;
+                int dx = (int) Mathf.Round(SubPixelCounter.x);
+                SubPixelCounter.x -= dx;
+
+                SubPixelCounter.y += newPos.y - transform.position.y;
+                int dy = (int) Mathf.Round(SubPixelCounter.y);
+                SubPixelCounter.y -= dy;
+
+                transform.position = new Vector3(transform.position.x + dx, transform.position.y + dy, Mathf.RoundToInt(newPos.z));
+
+                //transform.position = new Vector3(Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y), Mathf.RoundToInt(newPos.z));
             }
             else
             {

@@ -83,6 +83,7 @@ namespace Binocle
             obj.gameObject.SetActive(false);
             obj.SetParent(PoolEntity);
 
+            /*
             // Remove all children
             foreach(Transform child in obj.transform) {
                 GameObject.Destroy(child.gameObject);
@@ -91,11 +92,12 @@ namespace Binocle
             // Remove all components
             foreach (var comp in obj.GetComponents<Component>())
             {
-                if (!(comp is Transform))
+                if (!(comp is Transform) && !(comp is T))
                 {
                     GameObject.Destroy(comp);
                 }
             }
+            */
 
             _objectQueue.Enqueue(obj);
 

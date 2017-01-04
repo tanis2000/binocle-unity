@@ -5,6 +5,10 @@ namespace Binocle
 {
     public class Game : MonoBehaviour
     {
+        public static float TimeRate = 1f;
+        private const float CLAMP_ADD = 0.008333334f;
+        private const float FRAME_RATE = 60f;
+        private const float FULL_DELTA = 0.01666667f;
 
         public int DesignWidth
         {
@@ -22,7 +26,14 @@ namespace Binocle
 
         private int _designHeight = 240;
 
+        public static float LastTimeMult {get; private set;}
+        public static float TimeMult {get; private set;}
+        public static float DeltaTime {get; private set;}
+        public static float ActualDeltaTime {get; private set;}
+        public bool IsFixedTimeStep = false;
+
         protected PixelCamera pixelCamera;
+
 
         public virtual void Start()
         {
@@ -43,6 +54,18 @@ namespace Binocle
 
         public virtual void Update()
         {
+            LastTimeMult = TimeMult;
+            ActualDeltaTime = Time.deltaTime * TimeRate;
+            if (IsFixedTimeStep)
+            {
+                TimeMult = 1f * TimeRate;
+                DeltaTime = 0.01666667f * TimeRate;
+            }
+            else
+            {
+                DeltaTime = Mathf.Min(ActualDeltaTime, 0.01666667f * (TimeRate + 0.008333334f));
+                TimeMult = DeltaTime / 0.01666667f;
+            }
         }
 
         public T CreateScene<T>(string name) where T : Scene

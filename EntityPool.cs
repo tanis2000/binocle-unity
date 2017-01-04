@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace Binocle
 {
@@ -77,8 +77,26 @@ namespace Binocle
         /// pushes an item back on the stack
         /// </summary>
         /// <param name="obj">Object.</param>
-        public static void Free(T obj)
+        public void Free(T obj)
         {
+            obj.name = "_pooledobject";
+            obj.gameObject.SetActive(false);
+            obj.SetParent(PoolEntity);
+
+            // Remove all children
+            foreach(Transform child in obj.transform) {
+                GameObject.Destroy(child.gameObject);
+            }
+            
+            // Remove all components
+            foreach (var comp in obj.GetComponents<Component>())
+            {
+                if (!(comp is Transform))
+                {
+                    GameObject.Destroy(comp);
+                }
+            }
+
             _objectQueue.Enqueue(obj);
 
             if (obj is IPoolableEntity)

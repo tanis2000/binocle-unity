@@ -45,8 +45,8 @@ namespace Binocle
             {
                 var camTargetPos = target.position;
                 camTargetPos.z = transform.position.z;
-                camTargetPos.x = Mathf.Clamp(camTargetPos.x, Camera.main.orthographicSize * Camera.main.aspect, 64 * 16 - (Camera.main.orthographicSize * Camera.main.aspect));
-                camTargetPos.y = Mathf.Clamp(camTargetPos.y, Camera.main.orthographicSize, 10000f);
+                //camTargetPos.x = Mathf.Clamp(camTargetPos.x, Camera.main.orthographicSize * Camera.main.aspect, 64 * 16 - (Camera.main.orthographicSize * Camera.main.aspect));
+                //camTargetPos.y = Mathf.Clamp(camTargetPos.y, Camera.main.orthographicSize, 10000f);
                 var newPos = Vector3.Lerp(transform.position, camTargetPos, Game.TimeMult);
                 
                 SubPixelCounter.x += newPos.x - transform.position.x;

@@ -358,19 +358,21 @@ namespace Binocle.Sprites
 
         public void FlipTo(float dir)
         {
+            var scale = spriteRenderer.transform.localScale;
             if (dir < 0f)
-                spriteRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
+                spriteRenderer.transform.localScale = new Vector3(-1f * Mathf.Abs(scale.x), scale.y, scale.z);
             else
-                spriteRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+                spriteRenderer.transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
         }
 
         public void FlipTo(Vector3 position)
         {
+            var scale = spriteRenderer.transform.localScale;
             float diff = position.x - transform.position.x;
             if (diff < 0f)
-                spriteRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
+                spriteRenderer.transform.localScale = new Vector3(-1f * Mathf.Abs(scale.x), scale.y, scale.z);
             else
-                spriteRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+                spriteRenderer.transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
         }
     }
 }

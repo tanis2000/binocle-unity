@@ -152,7 +152,7 @@ namespace Binocle.Sprites
             playing = true;
 
             speedMultiplier = 1f;
-            //Debug.Log("Playing animation: " + animation.name);
+            //Debug.Log("Playing animation: [" + animation.name + "] [" + animation.sequenceCode + "] [" + animation.cue + "] L:" + loop);
 
             float timer = 0f;
             float delay = 1f / (float)animation.fps;
@@ -259,8 +259,9 @@ namespace Binocle.Sprites
 
                             if (duration <= 0f)
                             {
-                                while (duration < 0f || currentFrame < endFrame)
+                                while (duration < 0f || currentFrame <= endFrame)
                                 {
+                                    //Debug.Log(animation.name + " F:" + currentFrame + " E:" + endFrame);
                                     while (timer < delay)
                                     {
                                         timer += Time.deltaTime * speedMultiplier;
@@ -342,12 +343,14 @@ namespace Binocle.Sprites
                 }
             }
 
+            //Debug.Log(animation.name + " CF1: " + currentFrame + " Count: " + animation.frames.Count);
             if (currentFrame >= animation.frames.Count)
             {
                 if (loop)
                     currentFrame = 0;
                 else
                     currentFrame = animation.frames.Count - 1;
+                    //Debug.Log(animation.name + " CF2: " + currentFrame);
             }
         }
 

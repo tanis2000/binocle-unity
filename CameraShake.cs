@@ -67,8 +67,8 @@ namespace Binocle
                         cameraFollow.enabled = true;
                     }
 				}
-                Debug.Log(_shakeIntensity);
-                Debug.Log(_shakeOffset);
+                //Debug.Log(_shakeIntensity);
+                //Debug.Log(_shakeOffset);
                 Camera.main.transform.position += new Vector3((int)_shakeOffset.x, (int)_shakeOffset.y, 0);
             }
 		}

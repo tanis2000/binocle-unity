@@ -87,7 +87,6 @@ namespace Binocle.Importers.Tiled
         public bool VerticalFlip {get; private set;}
         public bool DiagonalFlip {get; private set;}
 
-        [CLSCompliant(false)]
         public TmxLayerTile(uint id, int x, int y)
         {
             var rawGid = id;

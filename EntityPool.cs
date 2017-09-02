@@ -42,7 +42,7 @@ namespace Binocle
         {
             while (cacheCount > _objectQueue.Count)
             {
-                var e = _objectQueue.Dequeue();
+                _objectQueue.Dequeue();
             }
         }
 

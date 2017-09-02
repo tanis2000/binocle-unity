@@ -53,8 +53,7 @@ namespace Binocle.Fonts
                     CharacterInfo charInfo = new CharacterInfo();
 
                     charInfo.index = (int)ToFloat(charNode, "id");
-                    charInfo.width = (int)ToFloat(charNode, "xadvance");
-                    charInfo.flipped = false;
+                    charInfo.advance = (int)ToFloat(charNode, "xadvance");
 
                     r = new Rect();
                     r.x = ((float)ToFloat(charNode, "x")) / texW;
@@ -62,7 +61,10 @@ namespace Binocle.Fonts
                     r.width = ((float)ToFloat(charNode, "width")) / texW;
                     r.height = ((float)ToFloat(charNode, "height")) / texH;
                     r.y = 1f - r.y - r.height;
-                    charInfo.uv = r;
+                    charInfo.uvTopLeft = new Vector2(r.xMin, r.yMin);
+                    charInfo.uvTopRight = new Vector2(r.xMax, r.yMin);
+                    charInfo.uvBottomLeft = new Vector2(r.xMin, r.yMax);
+                    charInfo.uvTopLeft = new Vector2(r.xMax, r.yMax);
 
 
                     r = new Rect();
@@ -72,7 +74,10 @@ namespace Binocle.Fonts
                     r.height = (float)ToFloat(charNode, "height");
                     r.y = -r.y;
                     r.height = -r.height;
-                    charInfo.vert = r;
+                    charInfo.minX = (int)r.xMin;
+                    charInfo.maxX = (int)r.xMax;
+                    charInfo.minY = (int)r.yMax;
+                    charInfo.maxY = (int)r.yMin;
 
                     charInfos[i] = charInfo;
                 }

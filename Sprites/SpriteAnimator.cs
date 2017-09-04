@@ -259,7 +259,7 @@ namespace Binocle.Sprites
 
                             if (duration <= 0f)
                             {
-                                while (duration < 0f || currentFrame <= endFrame)
+                                while (duration < 0f || currentFrame < endFrame)
                                 {
                                     //Debug.Log(animation.name + " F:" + currentFrame + " E:" + endFrame);
                                     while (timer < delay)

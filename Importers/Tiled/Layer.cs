@@ -60,10 +60,19 @@ namespace Binocle.Importers.Tiled
                 int k = 0;
                 foreach (var e in xData.Elements("tile"))
                 {
-                    var gid = (uint)e.Attribute("gid");
+                    var gid = e.Attribute("gid");
+                    uint gidInt;
+                    if (gid == null)
+                    {
+                        gidInt = 0;
+                    }
+                    else
+                    {
+                        gidInt = uint.Parse(gid.Value);
+                    }
                     var x = k % width;
                     var y = k / width;
-                    Tiles.Add(new TmxLayerTile(gid, x, y));
+                    Tiles.Add(new TmxLayerTile(gidInt, x, y));
                     k++;
                 }
             }
